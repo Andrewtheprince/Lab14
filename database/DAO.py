@@ -46,8 +46,7 @@ class DAO:
 								                         from orders o1, order_items oi 
 								                         where o1.order_id = oi.order_id and o1.store_id = %s
 								                         group by o1.order_id) o2
-                    where  o1.order_id < o2.order_id and ABS(DATEDIFF(o1.order_date, o2.order_date)) <= %s
-                    group by o1.order_id, o2.order_id"""
+                    where  o1.order_id < o2.order_id and ABS(DATEDIFF(o1.order_date, o2.order_date)) <= %s """
         cursor.execute(query, (store, store, giorniMAx,))
         for row in cursor:
             if row["ordine1"] in idMap and row["ordine2"] in idMap:
